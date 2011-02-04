@@ -1,0 +1,58 @@
+<lift:surround with="geo" at="content">
+  <head>
+    <script type="text/javascript">
+    function initiate_geolocation() {
+      navigator.geolocation.getCurrentPosition(handle_geolocation_query, handle_errors);
+    }
+
+    function handle_geolocation_query(position) {
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
+      var latLng = new google.maps.LatLng(lat,lng);
+
+      var options = {
+        zoom: 15,
+        center: latLng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+
+      var map = new google.maps.Map(document.getElementById('map_canvas'), options);
+
+      var layer = setKmlLayer(map, lat, lng);
+
+      google.maps.event.addListener(map, 'dragend', function(event) {
+        lat = map.center.lat();
+        lng = map.center.lng();
+        layer.setMap(null);
+        layer = setKmlLayer(map, lat, lng);
+      });
+    }
+
+    function handle_errors(error) {
+      switch(error.code) {
+        case error.PERMISSION_DENIED: alert('user did not share geolocation data');
+          break;
+        case error.POSITION_UNAVAILABLE: alert('could not detect current position');
+          break;
+        case error.TIMEOUT: alert('retrieving position timed out');
+          break;
+        default: alert('unknown error');
+          break;
+      }
+    }
+
+    function setKmlLayer(map, lat, lng) {
+      var options = {
+        preserveViewport: true
+      }
+      <lift:geoRSS:geo>
+      var layer = new google.maps.KmlLayer('http://www.hamamoto.org/geoapp/api/venue/latitude/' +
+          lat + '/longitude/' + lng + '/limit/<geo:limit/>/atom.xml', options);
+      </lift:geoRSS:geo>
+      layer.setMap(map);
+      return layer;
+    }        
+
+    </script>
+  </head>
+</lift:surround>

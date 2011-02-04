@@ -1,0 +1,15 @@
+<lift:surround with="default" at="content">
+  <h2>Welcome to your project!</h2>
+		<p>
+      <lift:helloWorld.howdy>
+        <span>Welcome to twitterclone at <b:time/></span>
+      </lift:helloWorld.howdy>
+    </p>
+
+  <!-- Ajaxを利用したボタンを生成するSnippetを呼び出すタグを追加 -->
+  <lift:helloWorld.greeting >
+    <div id="greeting-div"/>
+    <greeting:button />
+  </lift:helloWorld.greeting>
+</lift:surround>
+

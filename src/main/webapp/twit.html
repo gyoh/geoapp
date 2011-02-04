@@ -1,0 +1,53 @@
+<lift:surround with="default" at="content">
+
+<style>
+/* <![CDATA[ */
+.status{
+  border-bottom:2px dashed #D2DADA;
+  line-height:1.1em;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+.status li{
+  list-style:none;
+}
+.status textarea{
+  height:100%;
+  width :60%;
+}
+.message{
+  font-size:1.8em;
+  line-height:2.0em;
+  color:#666666;
+}
+.user{
+  font-size:1.2em;
+  color:#3333FF;
+}
+.dateOf{
+  font-size:0.9em;
+  color:#333333;
+}
+/* ]]> */
+</style>
+
+  <lift:Twit.post form="POST">
+    <h2>こんにちわ!<twit:name/>さん!</h2>
+    <h2>いま何してる?</h2>
+
+    <ul class="status">
+      <li> <twit:status/> </li>
+      <li> <twit:submit/> </li>
+    </ul>
+ </lift:Twit.post>
+
+ <ul class="status">
+   <lift:Twit.show>
+     <li class="message"> <twit:message/> </li>
+     <li class="user"> <twit:user/> </li>
+     <li class="dateOf"> <twit:dateOf/> </li>
+     <hr/>
+   </lift:Twit.show>
+ </ul>
+
+</lift:surround>

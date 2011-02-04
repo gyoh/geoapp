@@ -1,0 +1,37 @@
+<lift:surround with="default" at="content">
+
+<style>
+/* <![CDATA[ */
+.status{
+  border-bottom:2px dashed #D2DADA;
+  line-height:1.1em;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+.status li{
+  list-style:none;
+}
+.status textarea{
+  height:100%;
+  width :60%;
+}
+.message{
+  font-size:1.8em;
+  line-height:2.0em;
+  color:#666666;
+}
+.user{
+  font-size:1.2em;
+  color:#3333FF;
+}
+.dateOf{
+  font-size:0.9em;
+  color:#333333;
+}
+/* ]]> */
+</style>
+
+  <lift:comet type="CometTwit" name="Other">
+    <twit:messages>メッセージはありません。</twit:messages>
+  </lift:comet>
+</lift:surround>
